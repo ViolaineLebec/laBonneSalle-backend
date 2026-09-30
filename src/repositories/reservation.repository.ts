@@ -6,8 +6,17 @@ const getAll = async () => {
     return await prisma.reservation.findMany();
 };
 
-const create = async (data: { name: string, capacity: number }) => {
-    return await prisma.reservation.create({ data });
+const getById = async (id: number) => {
+    return await prisma.reservation.findUnique({ where: { id } });
+};
+
+// const create = async (data: { reservation: createReservationDTO }) => {
+//     return await prisma.reservation.create({ data: data.reservation });
+// };
+const create = async (data: createReservationDTO) => {
+    return await prisma.reservation.create({
+        data: data,
+    });
 };
 
 const update = async (id: number, data: { name?: string, capacity?: number }): Promise<reservationDTO> => {
@@ -22,6 +31,7 @@ const suppr = async (id: number) => {
 };
 
 export default {
+    getById,
     getAll,
     create,
     update,

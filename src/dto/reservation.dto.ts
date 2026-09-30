@@ -1,6 +1,14 @@
 export interface createReservationDTO {
-    name: string;
-    capacity: number;
+    roomId: number,
+    date_debut: string,
+    date_fin: string,
+    userId: number
 }
 
-export interface reservationDTO { id: number, name: string | null, capacity: number | null }
+export interface reservationDTO {
+    id: number,
+    roomId: number,
+    date_debut: string,
+    date_fin: string,
+    userId: number
+}

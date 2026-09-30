@@ -1,14 +1,14 @@
 import type { Request, NextFunction, Response } from "express";
 import userService from "../services/user.service.ts";
 
-// const getById = async (req, res, next) => {
-//     try {
-//         const room = await roomService.getById(req.params.id);
-//         res.status(200).json(room);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+const getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await userService.getById(Number(req.params.id));
+        res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+};
 
 const getAll = async (req: Request, res: Response) => {
     try {
@@ -53,7 +53,7 @@ const suppr = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-    // getById, 
+    getById,
     getAll,
     create,
     update,

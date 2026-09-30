@@ -2,6 +2,12 @@ import { prisma } from "../../database/database.ts";
 import { Prisma } from "../../generated/prisma/client.ts";
 import type { createUserDTO, userDTO } from "../dto/user.dto.ts";
 
+const getById = async (id: number) => {
+    return await prisma.user.findUnique({
+        where: { id }
+    });
+};
+
 const getAll = async () => {
     return await prisma.user.findMany();
 };
@@ -22,6 +28,7 @@ const suppr = async (id: number) => {
 };
 
 export default {
+    getById,
     getAll,
     create,
     update,

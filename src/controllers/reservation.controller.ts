@@ -1,14 +1,14 @@
 import type { Request, NextFunction, Response } from "express";
 import reservationService from "../services/reservation.service.ts";
 
-// const getById = async (req, res, next) => {
-//     try {
-//         const reservation = await reservationService.getById(req.params.id);
-//         res.status(200).json(reservation);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+const getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const reservation = await reservationService.getById(Number(req.params.id));
+        res.status(200).json(reservation);
+    } catch (error) {
+        next(error);
+    }
+};
 
 const getAll = async (req: Request, res: Response) => {
     try {
@@ -22,7 +22,12 @@ const getAll = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data = req.body;
-        const reservation = { name: data.name, capacity: Number(data.capacity) };
+        const reservation = {
+            roomId: Number(data.roomId),
+            date_debut: data.date_debut,
+            date_fin: data.date_fin,
+            userId: Number(data.userId)
+        };
 
         const newReservation = await reservationService.create(reservation);
         res.status(201).json(newReservation);
@@ -50,7 +55,7 @@ const suppr = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-    // getById, 
+    getById,
     getAll,
     create,
     update,

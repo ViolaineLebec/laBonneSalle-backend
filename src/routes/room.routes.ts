@@ -1,13 +1,14 @@
 import express from "express";
 import roomController from "../controllers/room.controller.ts";
+import { roomSchema, validate } from "../middlewares/room.middleware.ts";
 
 const roomRouter = express.Router();
 
-roomRouter.get("/rooms", roomController.getAll);
-roomRouter.get("/rooms/:id", roomController.getById);
-roomRouter.post("/rooms", roomController.create);
-// roomRouter.patch("/rooms/:id", roomController.update);
-roomRouter.delete("/rooms/:id", roomController.suppr);
-roomRouter.put("/rooms/:id", roomController.update);
+roomRouter.get("/", roomController.getAll);
+roomRouter.get("/:id", roomController.getById);
+roomRouter.post("/", validate(roomSchema), roomController.create);
+// roomRouter.patch("/:id", roomController.update);
+roomRouter.delete("/:id", roomController.suppr);
+roomRouter.put("/:id", validate(roomSchema), roomController.update);
 
 export default roomRouter;

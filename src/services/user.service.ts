@@ -1,12 +1,12 @@
 import userRepository from "../repositories/user.repository.ts";
 
-// const getById = async (id: string) => {
-//     const user = await userRepository.getById(id);
-//     if (!user) {
-//         throw new Error("User not found");
-//     }
-//     return user;
-// };
+const getById = async (id: number) => {
+    const user = await userRepository.getById(id);
+    if (!user) {
+        throw new Error("User not found");
+    }
+    return user;
+};
 
 const getAll = async () => {
     return await userRepository.getAll();
@@ -26,7 +26,7 @@ const suppr = async (id: number) => {
 }
 
 export default {
-    // getById,
+    getById,
     getAll,
     create,
     update,
